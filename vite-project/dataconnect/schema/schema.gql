@@ -1,0 +1,35 @@
+type User @table {
+  username: String!
+  email: String!
+  role: String!
+  createdAt: Timestamp!
+  firstName: String
+  lastName: String
+  lastLogin: Timestamp
+}
+
+type Task @table {
+  title: String!
+  description: String!
+  status: String!
+  dueDate: Date!
+  createdAt: Timestamp!
+  createdBy: User!
+  completedAt: Timestamp
+}
+
+type Assignment @table(key: ["task", "user"]) {
+  task: Task!
+  user: User!
+  assignedAt: Timestamp!
+  status: String!
+  acceptedAt: Timestamp
+  declinedAt: Timestamp
+}
+
+type Comment @table {
+  task: Task!
+  user: User!
+  content: String!
+  createdAt: Timestamp!
+}
